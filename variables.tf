@@ -34,7 +34,7 @@ variable "aws_transit1_region" {
 }
 
 variable "aws_transit1_name" {
-  default = "tf-aws-ca-central-1-transit"
+  default = "ace-aws-ca-central-1-transit"
 }
 
 variable "aws_transit1_cidr" {
@@ -46,7 +46,7 @@ variable "aws_spoke1_region" {
 }
 
 variable "aws_spoke1_name" {
-  default = "tf-aws-ca-central-1-spoke1"
+  default = "ace-aws-ca-central-1-spoke1"
 }
 
 variable "aws_spoke1_cidr" {
@@ -58,7 +58,7 @@ variable "aws_spoke2_region" {
 }
 
 variable "aws_spoke2_name" {
-  default = "tf-aws-ca-central-1-spoke2"
+  default = "ace-aws-ca-central-1-spoke2"
 }
 
 variable "aws_spoke2_cidr" {
