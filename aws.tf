@@ -65,7 +65,7 @@ EOF
 locals {
   bu2_app_user_data = <<EOF
 #!/bin/bash
-sudo hostnamectl set-hostname "BU2-Mobile-App"
+sudo hostnamectl set-hostname "BU2-App"
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 sudo echo 'ubuntu:${var.ace_password}' | /usr/sbin/chpasswd
 sudo /etc/init.d/ssh restart
