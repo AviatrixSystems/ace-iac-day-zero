@@ -11,6 +11,10 @@ variable "controller_ip" {
   type = string
 }
 
+variable "ace_password" {
+  type = string
+}
+
 variable "prefix" {
   type    = bool
   default = false

@@ -14,18 +14,18 @@ resource "aws_key_pair" "aws_canada_key" {
 
 # AWS Transit Modules
 module "aws_transit_1" {
-  source                               = "terraform-aviatrix-modules/aws-transit/aviatrix"
-  version                              = "4.0.1"
-  account                              = var.aws_account_name
-  region                               = var.aws_transit1_region
-  name                                 = var.aws_transit1_name
-  cidr                                 = var.aws_transit1_cidr
-  ha_gw                                = var.ha_enabled
-  prefix                               = var.prefix
-  suffix                               = var.suffix
-  insane_mode                          = false
-  instance_size                        = var.aws_transit_instance_size
-  enable_segmentation                  = true
+  source              = "terraform-aviatrix-modules/aws-transit/aviatrix"
+  version             = "4.0.1"
+  account             = var.aws_account_name
+  region              = var.aws_transit1_region
+  name                = var.aws_transit1_name
+  cidr                = var.aws_transit1_cidr
+  ha_gw               = var.ha_enabled
+  prefix              = var.prefix
+  suffix              = var.suffix
+  insane_mode         = false
+  instance_size       = var.aws_transit_instance_size
+  enable_segmentation = true
 }
 
 # AWS Spoke Modules
@@ -55,7 +55,24 @@ module "aws_spoke_2" {
   suffix          = var.suffix
   security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
+  single_ip_snat = true
 }
+
+/* resource "aviatrix_gateway" "ace-azure-egress-fqdn" {
+  cloud_type   = 8
+  account_name = var.azure_account_name
+  gw_name      = "${var.azure_spoke2_name}-egress"
+  vpc_id       = module.azure_spoke_2.vnet.vpc_id
+  vpc_reg      = var.azure_spoke2_region
+  gw_size      = var.azure_spoke_instance_size
+  subnet       = module.azure_spoke_2.vnet.public_subnets[0].cidr
+  lifecycle {
+    ignore_changes = [
+      single_ip_snat
+    ]
+  }
+  single_ip_snat = false
+} */
 
 # Multi-Cloud Segmentation
 resource "aviatrix_segmentation_security_domain" "BU1" {
@@ -73,5 +90,5 @@ resource "aviatrix_segmentation_security_domain" "BU2" {
 resource "aviatrix_segmentation_security_domain_connection_policy" "BU1_BU2" {
   domain_name_1 = "BU1"
   domain_name_2 = "BU2"
-  depends_on = [aviatrix_segmentation_security_domain.BU1, aviatrix_segmentation_security_domain.BU2]
+  depends_on    = [aviatrix_segmentation_security_domain.BU1, aviatrix_segmentation_security_domain.BU2]
 }
