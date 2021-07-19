@@ -55,24 +55,39 @@ module "aws_spoke_2" {
   suffix          = var.suffix
   security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
-  single_ip_snat = true
+  single_ip_snat  = true
 }
 
-/* resource "aviatrix_gateway" "ace-azure-egress-fqdn" {
-  cloud_type   = 8
-  account_name = var.azure_account_name
-  gw_name      = "${var.azure_spoke2_name}-egress"
-  vpc_id       = module.azure_spoke_2.vnet.vpc_id
-  vpc_reg      = var.azure_spoke2_region
-  gw_size      = var.azure_spoke_instance_size
-  subnet       = module.azure_spoke_2.vnet.public_subnets[0].cidr
-  lifecycle {
-    ignore_changes = [
-      single_ip_snat
-    ]
+
+resource "aviatrix_fqdn" "fqdn_filter" {
+  fqdn_tag     = "APP-RULES"
+  fqdn_mode    = "white"
+  fqdn_enabled = true
+  gw_filter_tag_list {
+    gw_name = var.aws_spoke2_name
   }
-  single_ip_snat = false
-} */
+  
+  manage_domain_names = false
+}
+
+resource "aviatrix_fqdn_tag_rule" "tcp" {
+  for_each      = local.egress_rules.tcp
+  fqdn_tag_name = aviatrix_fqdn.fqdn_filter.fqdn_tag
+  fqdn          = each.key
+  protocol      = "tcp"
+  port          = each.value
+  depends_on    = [aviatrix_fqdn.fqdn_filter]
+}
+
+resource "aviatrix_fqdn_tag_rule" "udp" {
+  for_each      = local.egress_rules.udp
+  fqdn_tag_name = aviatrix_fqdn.fqdn_filter.fqdn_tag
+  fqdn          = each.key
+  protocol      = "udp"
+  port          = each.value
+  depends_on    = [aviatrix_fqdn.fqdn_filter]
+}
+
 
 # Multi-Cloud Segmentation
 resource "aviatrix_segmentation_security_domain" "BU1" {
