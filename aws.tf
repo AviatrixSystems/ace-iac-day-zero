@@ -123,7 +123,8 @@ module "aws_spoke_app" {
   ami                    = data.aws_ami.ubuntu.id
   key_name               = var.CA_ec2_key_name
   instance_count         = 1
-  subnet_id              = module.aws_spoke_2.vpc.public_subnets[0].subnet_id
+  # subnet_id              = module.aws_spoke_2.vpc.public_subnets[0].subnet_id
+  subnet_id              = module.aws_spoke_2.vpc.private_subnets[0].subnet_id
   vpc_security_group_ids = [module.security_group_2.this_security_group_id]
   # associate_public_ip_address = true
   associate_public_ip_address = false
