@@ -5,11 +5,11 @@
 
 # In a true org structure, this line would be something like: "fqdn-rules.tf @security-group"
 # For this demo, this doesn't work because you can't author and review the same PR.
-./app-fqdn-rules.tf @umair-secops
+app-fqdn-rules.tf @umair-secops
 
 # In a true org structure, I'd suggest there would also be:
-./aws.tf @hoodbu
-./main.tf @hoodbu
-./provider.tf @hoodbu
-./variables.tf @hoodbu
-./versions.tf @hoodbu
+aws.tf @hoodbu
+main.tf @hoodbu
+provider.tf @hoodbu
+variables.tf @hoodbu
+versions.tf @hoodbu
