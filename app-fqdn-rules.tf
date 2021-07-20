@@ -6,6 +6,7 @@ locals {
       "aviatrix.com"   = "80"
       "*.espn.com"     = "443"
       "cnn.com"        = "443"
+      "nbc.com"        = "80"
     }
     udp = {
       "dns.google.com" = "53"
