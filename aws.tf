@@ -117,14 +117,14 @@ module "aws_spoke_bastion" {
 }
 
 module "aws_spoke_app" {
-  source                 = "terraform-aws-modules/ec2-instance/aws"
-  instance_type          = var.aws_test_instance_size
-  name                   = "${var.aws_spoke2_name}-app"
-  ami                    = data.aws_ami.ubuntu.id
-  key_name               = var.CA_ec2_key_name
-  instance_count         = 1
-  subnet_id              = module.aws_spoke_2.vpc.private_subnets[0].subnet_id
-  vpc_security_group_ids = [module.security_group_2.this_security_group_id]
+  source                      = "terraform-aws-modules/ec2-instance/aws"
+  instance_type               = var.aws_test_instance_size
+  name                        = "${var.aws_spoke2_name}-app"
+  ami                         = data.aws_ami.ubuntu.id
+  key_name                    = var.CA_ec2_key_name
+  instance_count              = 1
+  subnet_id                   = module.aws_spoke_2.vpc.private_subnets[0].subnet_id
+  vpc_security_group_ids      = [module.security_group_2.this_security_group_id]
   associate_public_ip_address = false
   user_data_base64            = base64encode(local.bu2_app_user_data)
   providers = {
