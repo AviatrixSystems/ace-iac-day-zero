@@ -15,7 +15,7 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-data "aws_ami" "ubuntu2" {
+/* data "aws_ami" "ubuntu2" {
   provider    = aws.canada
   most_recent = true
   filter {
@@ -27,7 +27,7 @@ data "aws_ami" "ubuntu2" {
     values = ["hvm"]
   }
   owners = ["099720109477"] # Canonical
-}
+} */
 
 data "aws_ami" "amazon_linux" {
   provider    = aws.canada
@@ -117,16 +117,14 @@ module "aws_spoke_bastion" {
 }
 
 module "aws_spoke_app" {
-  source                 = "terraform-aws-modules/ec2-instance/aws"
-  instance_type          = var.aws_test_instance_size
-  name                   = "${var.aws_spoke2_name}-app"
-  ami                    = data.aws_ami.ubuntu.id
-  key_name               = var.CA_ec2_key_name
-  instance_count         = 1
-  # subnet_id              = module.aws_spoke_2.vpc.public_subnets[0].subnet_id
-  subnet_id              = module.aws_spoke_2.vpc.private_subnets[0].subnet_id
-  vpc_security_group_ids = [module.security_group_2.this_security_group_id]
-  # associate_public_ip_address = true
+  source                      = "terraform-aws-modules/ec2-instance/aws"
+  instance_type               = var.aws_test_instance_size
+  name                        = "${var.aws_spoke2_name}-app"
+  ami                         = data.aws_ami.ubuntu.id
+  key_name                    = var.CA_ec2_key_name
+  instance_count              = 1
+  subnet_id                   = module.aws_spoke_2.vpc.private_subnets[0].subnet_id
+  vpc_security_group_ids      = [module.security_group_2.this_security_group_id]
   associate_public_ip_address = false
   user_data_base64            = base64encode(local.bu2_app_user_data)
   providers = {
@@ -139,11 +137,9 @@ output "aws_spoke1_bastion_public_ip" {
 }
 
 output "aws_spoke1_bastion_private_ip" {
-  # value = aws_instance.aws_spoke_1.private_ip
   value = module.aws_spoke_bastion.private_ip
 }
 
 output "aws_spoke2_app_private_ip" {
-  # value = aws_instance.aws_spoke_2.private_ip
   value = module.aws_spoke_app.private_ip
 }

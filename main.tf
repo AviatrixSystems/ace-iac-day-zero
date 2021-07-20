@@ -66,7 +66,7 @@ resource "aviatrix_fqdn" "fqdn_filter" {
   gw_filter_tag_list {
     gw_name = var.aws_spoke2_name
   }
-  
+
   manage_domain_names = false
 }
 
