@@ -1,4 +1,4 @@
-// ACE-ops Core Aviatrix Infrastructure
+// ACE-IAC Core Aviatrix Infrastructure
 
 # Private Key creation
 resource "tls_private_key" "avtx_key" {
@@ -57,37 +57,6 @@ module "aws_spoke_2" {
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
   single_ip_snat  = true
 }
-
-
-resource "aviatrix_fqdn" "fqdn_filter" {
-  fqdn_tag     = "APP-RULES"
-  fqdn_mode    = "white"
-  fqdn_enabled = true
-  gw_filter_tag_list {
-    gw_name = module.aws_spoke_2.spoke_gateway.gw_name
-  }
-
-  manage_domain_names = false
-}
-
-resource "aviatrix_fqdn_tag_rule" "tcp" {
-  for_each      = local.egress_rules.tcp
-  fqdn_tag_name = aviatrix_fqdn.fqdn_filter.fqdn_tag
-  fqdn          = each.key
-  protocol      = "tcp"
-  port          = each.value
-  depends_on    = [aviatrix_fqdn.fqdn_filter]
-}
-
-resource "aviatrix_fqdn_tag_rule" "udp" {
-  for_each      = local.egress_rules.udp
-  fqdn_tag_name = aviatrix_fqdn.fqdn_filter.fqdn_tag
-  fqdn          = each.key
-  protocol      = "udp"
-  port          = each.value
-  depends_on    = [aviatrix_fqdn.fqdn_filter]
-}
-
 
 # Multi-Cloud Segmentation
 resource "aviatrix_segmentation_security_domain" "BU1" {
