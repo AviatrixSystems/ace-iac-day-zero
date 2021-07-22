@@ -7,8 +7,6 @@ This repository builds out the following infrastructure for the Aviatrix ACE IaC
 - Multi-Cloud Segmentation (2 security domains connected by connection policy)
 - Spoke 2 GW configured for Single IP SNAT
 
-<img src="topology.png">
-
 Component | Version
 --- | ---
 Aviatrix Controller | UserConnect-6.4.2683 (6.4)
