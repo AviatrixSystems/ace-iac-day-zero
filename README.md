@@ -1,4 +1,4 @@
-# ace-iac-day-zero
+# ace-iac-day-zero (Lab 1)
 
 This repository builds out the following infrastructure for the Aviatrix ACE IaC course:
 
