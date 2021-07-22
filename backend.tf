@@ -4,7 +4,7 @@ terraform {
     hostname     = "app.terraform.io"
     # organization = "<replace-with-your-Terraform-Cloud-organization-and-uncomment>"
     workspaces {
-      name = "ace-iac"
+      name = "ace-iac-day-zero"
     }
   }
 }
