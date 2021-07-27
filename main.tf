@@ -39,6 +39,7 @@ module "aws_spoke_1" {
   ha_gw           = var.ha_enabled
   prefix          = var.prefix
   suffix          = var.suffix
+  instance_size   = var.aws_spoke_instance_size
   security_domain = aviatrix_segmentation_security_domain.BU1.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
 }
@@ -53,6 +54,7 @@ module "aws_spoke_2" {
   ha_gw           = var.ha_enabled
   prefix          = var.prefix
   suffix          = var.suffix
+  instance_size   = var.aws_spoke_instance_size
   security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
   single_ip_snat  = true
