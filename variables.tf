@@ -29,8 +29,7 @@ variable "aws_account_name" {
 }
 
 variable "aws_transit_instance_size" {
-  type    = string
-  default = "c5.xlarge"
+  default = "t2.micro"
 }
 
 variable "aws_transit1_region" {
@@ -43,6 +42,10 @@ variable "aws_transit1_name" {
 
 variable "aws_transit1_cidr" {
   default = "10.1.200.0/23"
+}
+
+variable "aws_spoke_instance_size" {
+  default = "t2.micro"
 }
 
 variable "aws_spoke1_region" {
@@ -70,7 +73,7 @@ variable "aws_spoke2_cidr" {
 }
 
 variable "aws_test_instance_size" {
-  default = "t3.micro"
+  default = "t2.micro"
 }
 
 variable "CA_ec2_key_name" {
