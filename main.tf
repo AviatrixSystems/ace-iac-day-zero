@@ -21,9 +21,7 @@ module "aws_transit_1" {
   name                = var.aws_transit1_name
   cidr                = var.aws_transit1_cidr
   ha_gw               = var.ha_enabled
-  prefix              = var.prefix
-  suffix              = var.suffix
-  insane_mode         = false
+  prefix              = false
   instance_size       = var.aws_transit_instance_size
   enable_segmentation = true
 }
@@ -37,8 +35,8 @@ module "aws_spoke_1" {
   name            = var.aws_spoke1_name
   cidr            = var.aws_spoke1_cidr
   ha_gw           = var.ha_enabled
-  prefix          = var.prefix
-  suffix          = var.suffix
+  prefix          = false
+  suffix          = false
   instance_size   = var.aws_spoke_instance_size
   security_domain = aviatrix_segmentation_security_domain.BU1.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
@@ -52,8 +50,8 @@ module "aws_spoke_2" {
   name            = var.aws_spoke2_name
   cidr            = var.aws_spoke2_cidr
   ha_gw           = var.ha_enabled
-  prefix          = var.prefix
-  suffix          = var.suffix
+  prefix          = false
+  suffix          = false
   instance_size   = var.aws_spoke_instance_size
   security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
@@ -73,8 +71,8 @@ resource "aviatrix_segmentation_security_domain" "BU2" {
     module.aws_transit_1
   ]
 }
-resource "aviatrix_segmentation_security_domain_connection_policy" "BU1_BU2" {
+/* resource "aviatrix_segmentation_security_domain_connection_policy" "BU1_BU2" {
   domain_name_1 = "BU1"
   domain_name_2 = "BU2"
   depends_on    = [aviatrix_segmentation_security_domain.BU1, aviatrix_segmentation_security_domain.BU2]
-}
+} */
