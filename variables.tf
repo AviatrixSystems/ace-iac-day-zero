@@ -1,18 +1,14 @@
 variable "username" {
-  type    = string
   default = "admin"
 }
 
 variable "password" {
-  type = string
 }
 
 variable "controller_ip" {
-  type = string
 }
 
 variable "ace_password" {
-  type = string
 }
 
 variable "prefix" {
@@ -53,7 +49,7 @@ variable "aws_spoke1_region" {
 }
 
 variable "aws_spoke1_name" {
-  default = "ace-aws-ca-central-1-spoke1"
+  default = "ace-iac-spoke1"
 }
 
 variable "aws_spoke1_cidr" {
@@ -65,7 +61,7 @@ variable "aws_spoke2_region" {
 }
 
 variable "aws_spoke2_name" {
-  default = "ace-aws-ca-central-1-spoke2"
+  default = "ace-iac-spoke2"
 }
 
 variable "aws_spoke2_cidr" {
