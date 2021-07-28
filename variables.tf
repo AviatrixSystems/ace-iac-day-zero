@@ -11,16 +11,6 @@ variable "controller_ip" {
 variable "ace_password" {
 }
 
-variable "prefix" {
-  type    = bool
-  default = false
-}
-
-variable "suffix" {
-  type    = bool
-  default = false
-}
-
 variable "aws_account_name" {
 }
 
@@ -74,11 +64,6 @@ variable "aws_test_instance_size" {
 
 variable "CA_ec2_key_name" {
   default = "ACE"
-}
-
-variable "insane" {
-  type    = bool
-  default = true
 }
 
 variable "ha_enabled" {
