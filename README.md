@@ -23,5 +23,5 @@ AWS Terraform Provider | > 3.0
   - AWS_ACCESS_KEY_ID
   - AWS_SECRET_ACCESS_KEY
 
-<img src="topology.png">
+<img src="ACE IaC.png">
 
