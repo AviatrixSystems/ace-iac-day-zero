@@ -15,24 +15,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-data "aws_ami" "amazon_linux" {
-  provider    = aws.canada
-  most_recent = true
-  owners      = ["amazon"]
-  filter {
-    name = "name"
-    values = [
-      "amzn2-ami-hvm-*-x86_64-gp2",
-    ]
-  }
-  filter {
-    name = "owner-alias"
-    values = [
-      "amazon",
-    ]
-  }
-}
-
 locals {
   bu1_bastion_user_data = <<EOF
 #!/bin/bash
