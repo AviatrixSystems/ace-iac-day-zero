@@ -14,7 +14,7 @@ resource "aws_key_pair" "aws_canada_key" {
 
 # Create an Aviatrix Azure Account
 resource "aviatrix_account" "azure_account" {
-  account_name        = "username"
+  account_name        = var.azure_account_name
   cloud_type          = 8
   arm_subscription_id = var.azure_subscription_id
   arm_directory_id    = var.azure_tenant_id
@@ -71,7 +71,7 @@ module "aws_spoke_1" {
 module "azure_spoke_2" {
   source          = "terraform-aviatrix-modules/azure-spoke/aviatrix"
   version         = "4.0.1"
-  account         = var.azure_account_name
+  account         = aviatrix_account.azure_account.account_name
   region          = var.azure_spoke2_region
   name            = var.azure_spoke2_name
   cidr            = var.azure_spoke2_cidr
