@@ -46,20 +46,44 @@ variable "aws_spoke1_cidr" {
   default = "10.1.211.0/24"
 }
 
-variable "aws_spoke2_region" {
-  default = "ca-central-1"
+variable "aws_test_instance_size" {
+  default = "t2.micro"
 }
 
-variable "aws_spoke2_name" {
+variable "azure_account_name" {
+  default = "azure-account"
+}
+
+variable "azure_subscription_id" {
+}
+
+variable "azure_client_id" {
+}
+
+variable "azure_client_secret" {
+}
+
+variable "azure_tenant_id" {
+}
+
+variable "azure_spoke_instance_size" {
+  default = "Standard_B1ms"
+}
+
+variable "azure_spoke2_region" {
+  default = "Canada East"
+}
+
+variable "azure_spoke2_name" {
   default = "ace-iac-spoke2"
 }
 
-variable "aws_spoke2_cidr" {
+variable "azure_spoke2_cidr" {
   default = "10.1.212.0/24"
 }
 
-variable "aws_test_instance_size" {
-  default = "t2.micro"
+variable "azure_test_instance_size" {
+  default = "Standard_B1ms"
 }
 
 variable "CA_ec2_key_name" {

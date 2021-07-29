@@ -30,7 +30,7 @@ sudo echo "<html><h1>Aviatrix is awesome</h1></html>" > /var/www/html/index.html
 EOF
 }
 
-locals {
+/* locals {
   bu2_app_user_data = <<EOF
 #!/bin/bash
 sudo hostnamectl set-hostname "BU2-App"
@@ -42,7 +42,7 @@ sudo apt-get -y install traceroute unzip build-essential git gcc hping3 apache2 
 sudo apt autoremove
 sudo /etc/init.d/ssh restart
 EOF
-}
+} */
 
 module "security_group_1" {
   source              = "terraform-aws-modules/security-group/aws"
@@ -58,7 +58,7 @@ module "security_group_1" {
   }
 }
 
-module "security_group_2" {
+/* module "security_group_2" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
   name                = "security_group_spoke2"
@@ -70,7 +70,7 @@ module "security_group_2" {
   providers = {
     aws = aws.canada
   }
-}
+} */
 
 module "aws_spoke_bastion" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
@@ -88,6 +88,7 @@ module "aws_spoke_bastion" {
   }
 }
 
+/* 
 module "aws_spoke_app" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
   instance_type               = var.aws_test_instance_size
@@ -103,6 +104,7 @@ module "aws_spoke_app" {
     aws = aws.canada
   }
 }
+*/
 
 output "aws_spoke1_bastion_public_ip" {
   value = module.aws_spoke_bastion.public_ip
@@ -110,8 +112,4 @@ output "aws_spoke1_bastion_public_ip" {
 
 output "aws_spoke1_bastion_private_ip" {
   value = module.aws_spoke_bastion.private_ip
-}
-
-output "aws_spoke2_app_private_ip" {
-  value = module.aws_spoke_app.private_ip
 }
