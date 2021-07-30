@@ -81,7 +81,7 @@ module "azure_spoke_2" {
   suffix          = false
   security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
-  single_ip_snat  = true
+  # single_ip_snat  = true
 }
 
 # Multi-Cloud Segmentation
