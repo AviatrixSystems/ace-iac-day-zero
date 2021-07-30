@@ -1,11 +1,4 @@
 # Spoke Ubuntu VM 2
-/* data "template_file" "azure-spoke2-init" {
-  template = file("${path.module}/azure-vm-config/azure_bootstrap.sh")
-  vars = {
-    name     = "BU2-DB"
-    password = var.ace_password
-  }
-} */
 
 locals {
   bu2_app_user_data = <<EOF
@@ -112,7 +105,6 @@ resource "azurerm_linux_virtual_machine" "azure_spoke2_vm" {
     caching              = "ReadWrite"
   }
   custom_data = base64encode(local.bu2_app_user_data)
-  # custom_data = base64encode(data.template_file.azure-spoke2-init.rendered)
 }
 
 output "azure_spoke2_app_private_ip" {

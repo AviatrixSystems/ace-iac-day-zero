@@ -2,10 +2,11 @@
 
 This repository builds out the following infrastructure for the Aviatrix ACE IaC course:
 
-- Aviatrix Transit in AWS with 2 spokes
+- Aviatrix Transit in AWS
+- Aviatrix Spoke in AWS
+- Aviatrix Spoke in Azure
 - Ubuntu VMs with password authentication (1 per spoke)
-- Multi-Cloud Segmentation (2 security domains connected by connection policy)
-- Spoke 2 GW configured for Single IP SNAT
+- Multi-Cloud Segmentation (2 security domains)
 
 Component | Version
 --- | ---
@@ -22,6 +23,9 @@ AWS Terraform Provider | > 3.0
 - Account credentials for AWS defined in environment. The following environment variables will be needed:
   - AWS_ACCESS_KEY_ID
   - AWS_SECRET_ACCESS_KEY
-
-<img src="ACE IaC.png">
+  - TF_VAR_azure_subscription_id
+  - TF_VAR_azure_tenant_id
+  - TF_VAR_azure_client_id
+  - TF_VAR_azure_client_secret 
+<img src="topology.png">
 

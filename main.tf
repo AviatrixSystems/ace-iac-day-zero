@@ -52,22 +52,6 @@ module "aws_spoke_1" {
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
 }
 
-/* module "aws_spoke_2" {
-  source          = "terraform-aviatrix-modules/aws-spoke/aviatrix"
-  version         = "4.0.1"
-  account         = var.aws_account_name
-  region          = var.aws_spoke2_region
-  name            = var.aws_spoke2_name
-  cidr            = var.aws_spoke2_cidr
-  ha_gw           = var.ha_enabled
-  prefix          = false
-  suffix          = false
-  instance_size   = var.aws_spoke_instance_size
-  security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
-  transit_gw      = module.aws_transit_1.transit_gateway.gw_name
-  single_ip_snat  = true
-} */
-
 module "azure_spoke_2" {
   source          = "terraform-aviatrix-modules/azure-spoke/aviatrix"
   version         = "4.0.1"
@@ -81,7 +65,6 @@ module "azure_spoke_2" {
   suffix          = false
   security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
-  # single_ip_snat  = true
 }
 
 # Multi-Cloud Segmentation
