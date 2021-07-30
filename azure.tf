@@ -111,7 +111,7 @@ resource "azurerm_linux_virtual_machine" "azure_spoke2_vm" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
-  custom_data            = base64encode(local.bu2_app_user_data)
+  custom_data = base64encode(local.bu2_app_user_data)
   # custom_data = base64encode(data.template_file.azure-spoke2-init.rendered)
 }
 
