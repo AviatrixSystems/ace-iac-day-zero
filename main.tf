@@ -6,9 +6,9 @@ resource "tls_private_key" "avtx_key" {
   rsa_bits  = 2048
 }
 
-resource "aws_key_pair" "aws_canada_key" {
-  provider   = aws.canada
-  key_name   = var.CA_ec2_key_name
+resource "aws_key_pair" "ace_key" {
+  provider   = aws.east
+  key_name   = var.ace_ec2_key_name
   public_key = tls_private_key.avtx_key.public_key_openssh
 }
 
