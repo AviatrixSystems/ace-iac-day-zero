@@ -7,7 +7,7 @@ resource "tls_private_key" "avtx_key" {
 }
 
 resource "aws_key_pair" "ace_key" {
-  provider   = aws.east
+  provider   = aws.ohio
   key_name   = var.ace_ec2_key_name
   public_key = tls_private_key.avtx_key.public_key_openssh
 }
