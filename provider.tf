@@ -5,8 +5,8 @@ provider "aviatrix" {
 }
 
 provider "aws" {
-  alias  = "canada"
-  region = "ca-central-1"
+  alias  = "east"
+  region = var.aws_spoke1_region
 }
 
 provider "azurerm" {
