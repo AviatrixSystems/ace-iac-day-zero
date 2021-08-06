@@ -86,7 +86,7 @@ variable "azure_test_instance_size" {
   default = "Standard_B1ms"
 }
 
-variable "CA_ec2_key_name" {
+variable "ace_ec2_key_name" {
   default = "ACE"
 }
 
