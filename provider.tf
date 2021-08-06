@@ -5,8 +5,8 @@ provider "aviatrix" {
 }
 
 provider "aws" {
-  alias  = "ohio"
-  region = "us-east-2"
+  alias  = "canada"
+  region = "ca-central-1"
 }
 
 provider "azurerm" {
