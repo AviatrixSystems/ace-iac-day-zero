@@ -46,6 +46,7 @@ module "security_group_1" {
 
 module "aws_spoke_bastion" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
+  version                     = "2.21.0"
   instance_type               = var.aws_test_instance_size
   name                        = "${var.aws_spoke1_name}-bastion"
   ami                         = data.aws_ami.ubuntu.id
