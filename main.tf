@@ -24,14 +24,14 @@ resource "aviatrix_account" "azure_account" {
 
 # AWS Transit Modules
 module "aws_transit_1" {
-  source              = "terraform-aviatrix-modules/aws-transit/aviatrix"
-  version             = "4.0.1"
+  source              = "terraform-aviatrix-modules/mc-transit/aviatrix"
+  version             = "1.1.0"
+  cloud               = "AWS"
   account             = var.aws_account_name
   region              = var.aws_transit1_region
   name                = var.aws_transit1_name
   cidr                = var.aws_transit1_cidr
   ha_gw               = var.ha_enabled
-  prefix              = false
   instance_size       = var.aws_transit_instance_size
   enable_segmentation = true
 }
@@ -39,22 +39,21 @@ module "aws_transit_1" {
 # AWS Spoke Modules
 module "aws_spoke_1" {
   source          = "terraform-aviatrix-modules/aws-spoke/aviatrix"
-  version         = "4.0.1"
+  version         = "1.1.0"
+  cloud           = "AWS"
   account         = var.aws_account_name
   region          = var.aws_spoke1_region
   name            = var.aws_spoke1_name
   cidr            = var.aws_spoke1_cidr
   instance_size   = var.aws_spoke_instance_size
   ha_gw           = var.ha_enabled
-  prefix          = false
-  suffix          = false
   security_domain = aviatrix_segmentation_security_domain.BU1.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
 }
 
 module "azure_spoke_2" {
   source          = "terraform-aviatrix-modules/azure-spoke/aviatrix"
-  version         = "4.0.1"
+  version         = "1.1.0"
   account         = aviatrix_account.azure_account.account_name
   region          = var.azure_spoke2_region
   name            = var.azure_spoke2_name
@@ -80,6 +79,7 @@ resource "aviatrix_segmentation_security_domain" "BU2" {
     module.aws_transit_1
   ]
 }
+  
 /* resource "aviatrix_segmentation_security_domain_connection_policy" "BU1_BU2" {
   domain_name_1 = "BU1"
   domain_name_2 = "BU2"
