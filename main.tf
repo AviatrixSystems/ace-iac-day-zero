@@ -25,7 +25,7 @@ resource "aviatrix_account" "azure_account" {
 # AWS Transit Modules
 module "aws_transit_1" {
   source              = "terraform-aviatrix-modules/mc-transit/aviatrix"
-  version             = "1.1.3"
+  version             = "2.1.4"
   cloud               = "AWS"
   account             = var.aws_account_name
   region              = var.aws_transit1_region
@@ -39,7 +39,7 @@ module "aws_transit_1" {
 # AWS Spoke Modules
 module "aws_spoke_1" {
   source          = "terraform-aviatrix-modules/mc-spoke/aviatrix"
-  version         = "1.1.2"
+  version         = "1.2.3"
   cloud           = "AWS"
   account         = var.aws_account_name
   region          = var.aws_spoke1_region
@@ -47,13 +47,13 @@ module "aws_spoke_1" {
   cidr            = var.aws_spoke1_cidr
   instance_size   = var.aws_spoke_instance_size
   ha_gw           = var.ha_enabled
-  security_domain = aviatrix_segmentation_security_domain.BU1.domain_name
+  network_domain  = aviatrix_segmentation_network_domain.BU1.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
 }
 
 module "azure_spoke_2" {
   source          = "terraform-aviatrix-modules/mc-spoke/aviatrix"
-  version         = "1.1.2"
+  version         = "1.2.3"
   cloud           = "Azure"
   account         = aviatrix_account.azure_account.account_name
   region          = var.azure_spoke2_region
@@ -61,26 +61,26 @@ module "azure_spoke_2" {
   cidr            = var.azure_spoke2_cidr
   instance_size   = var.azure_spoke_instance_size
   ha_gw           = var.ha_enabled
-  security_domain = aviatrix_segmentation_security_domain.BU2.domain_name
+  network_domain  = aviatrix_segmentation_network_domain.BU2.domain_name
   transit_gw      = module.aws_transit_1.transit_gateway.gw_name
 }
 
 # Multi-Cloud Segmentation
-resource "aviatrix_segmentation_security_domain" "BU1" {
+resource "aviatrix_segmentation_network_domain" "BU1" {
   domain_name = "BU1"
   depends_on = [
     module.aws_transit_1
   ]
 }
-resource "aviatrix_segmentation_security_domain" "BU2" {
+resource "aviatrix_segmentation_network_domain" "BU2" {
   domain_name = "BU2"
   depends_on = [
     module.aws_transit_1
   ]
 }
   
-/* resource "aviatrix_segmentation_security_domain_connection_policy" "BU1_BU2" {
+/* resource "aviatrix_segmentation_network_domain_connection_policy" "BU1_BU2" {
   domain_name_1 = "BU1"
   domain_name_2 = "BU2"
-  depends_on    = [aviatrix_segmentation_security_domain.BU1, aviatrix_segmentation_security_domain.BU2]
+  depends_on    = [aviatrix_segmentation_network_domain.BU1, aviatrix_segmentation_network_domain.BU2]
 } */
