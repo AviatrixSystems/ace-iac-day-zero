@@ -28,5 +28,6 @@ Azure Terraform Provider | > 3.0.0
   - TF_VAR_azure_tenant_id
   - TF_VAR_azure_client_id
   - TF_VAR_azure_client_secret
+  
 <img src="topology.png">
 
