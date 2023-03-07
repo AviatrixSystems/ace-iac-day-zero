@@ -95,3 +95,6 @@ variable "ha_enabled" {
   type    = bool
   default = false
 }
+variable "azure_spoke2_name" {
+  default = "ace-iac-spoke2"
+}
