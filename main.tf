@@ -25,7 +25,7 @@ resource "aviatrix_account" "azure_account" {
 # AWS Transit Modules
 module "aws_transit_1" {
   source              = "terraform-aviatrix-modules/mc-transit/aviatrix"
-  version             = "2.3.0"
+  version             = "2.4.1"
   cloud               = "AWS"
   account             = var.aws_account_name
   region              = var.aws_transit1_region
@@ -39,7 +39,7 @@ module "aws_transit_1" {
 # AWS Spoke Modules
 module "aws_spoke_1" {
   source          = "terraform-aviatrix-modules/mc-spoke/aviatrix"
-  version         = "1.4.1"
+  version         = "1.5.0"
   cloud           = "AWS"
   account         = var.aws_account_name
   region          = var.aws_spoke1_region
@@ -53,7 +53,7 @@ module "aws_spoke_1" {
 
 module "azure_spoke_2" {
   source          = "terraform-aviatrix-modules/mc-spoke/aviatrix"
-  version         = "1.4.1"
+  version         = "1.5.0"
   cloud           = "Azure"
   account         = aviatrix_account.azure_account.account_name
   region          = var.azure_spoke2_region
@@ -79,8 +79,11 @@ resource "aviatrix_segmentation_network_domain" "BU2" {
   ]
 }
   
-/* resource "aviatrix_segmentation_network_domain_connection_policy" "BU1_BU2" {
-  domain_name_1 = "BU1"
-  domain_name_2 = "BU2"
-  depends_on    = [aviatrix_segmentation_network_domain.BU1, aviatrix_segmentation_network_domain.BU2]
-} */
+#resource "aviatrix_segmentation_network_domain_connection_policy" "BU1_BU2" {
+#  domain_name_1 = "BU1"
+#  domain_name_2 = "BU2"
+#  depends_on    = [aviatrix_segmentation_network_domain.BU1, aviatrix_segmentation_network_domain.BU2]
+#} 
+
+
+
