@@ -1,8 +1,16 @@
 provider "aviatrix" {
-  version = "3.1.0"
   controller_ip = var.controller_ip
   username      = var.username
   password      = var.password
+}
+
+terraform {
+  required_providers {
+    aviatrix = {
+      source  = "aviatrixsystems/aviatrix"
+      version = "3.1.0"
+    }
+  }
 }
 
 provider "aws" {
