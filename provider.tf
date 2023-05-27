@@ -4,15 +4,6 @@ provider "aviatrix" {
   password      = var.password
 }
 
-terraform {
-  required_providers {
-    aviatrix = {
-      source  = "aviatrixsystems/aviatrix"
-      version = "3.1.0"
-    }
-  }
-}
-
 provider "aws" {
   alias  = "ohio"
   region = var.aws_spoke1_region
