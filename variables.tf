@@ -3,12 +3,14 @@ variable "username" {
 }
 
 variable "password" {
+  sensitive = true
 }
 
 variable "controller_ip" {
 }
 
 variable "ace_password" {
+  sensitive = true
 }
 
 variable "aws_account_name" {
@@ -56,15 +58,19 @@ variable "azure_account_name" {
 }
 
 variable "azure_subscription_id" {
+  sensitive = true
 }
 
 variable "azure_client_id" {
+  sensitive = true
 }
 
 variable "azure_client_secret" {
+  sensitive = true
 }
 
 variable "azure_tenant_id" {
+  sensitive = true
 }
 
 variable "azure_spoke_instance_size" {
