@@ -32,7 +32,7 @@ variable "aws_transit1_cidr" {
 }
 
 variable "aws_spoke_instance_size" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "aws_spoke1_region" {
