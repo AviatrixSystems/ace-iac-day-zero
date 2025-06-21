@@ -16,7 +16,7 @@ variable "aws_account_name" {
 }
 
 variable "aws_transit_instance_size" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "aws_transit1_region" {
